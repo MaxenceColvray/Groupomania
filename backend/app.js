@@ -1,31 +1,8 @@
-/*const express = require('express');
-
-const app = express();
-
-app.use((req, res, next) => {
-  console.log('Requête reçue !');
-  next();
-});
-
-app.use((req, res, next) => {
-  res.status(201);
-  next();
-});
-
-app.use((req, res, next) => {
-  res.json({ message: 'Votre requête a bien été reçue !' });
-  next();
-});
-
-app.use((req, res, next) => {
-  console.log('Réponse envoyée avec succès !');
-});
-
-module.exports = app;*/
 
 const express = require('express');
 const app = express();
 app.use(express.json()); //Convertit les requètes Post en objet utilisable
+const path = require('path');
 
 
 /*Gère les erreurs de CORS*/
@@ -38,7 +15,7 @@ app.use((req, res, next) => {
 
 /*Connection à notre BDD mongoDB */
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://maxence:Azerty444@cluster0.nmhpjpe.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://maxence:Azerty444@cluster0.nmhpjpe.mongodb.net/groupomania?retryWrites=true&w=majority',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -48,10 +25,11 @@ mongoose.connect('mongodb+srv://maxence:Azerty444@cluster0.nmhpjpe.mongodb.net/?
 
 /*Ici on importe nos routeurs*/
 const userRoutes = require('./routes/user');
-//const sauceRoutes = require('./routes/sauce');
+const postRoutes = require('./routes/post');
 
 app.use('/api/auth', userRoutes);
-//app.use('/api/sauces', sauceRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/api/post', postRoutes);
 
 
 module.exports = app;
