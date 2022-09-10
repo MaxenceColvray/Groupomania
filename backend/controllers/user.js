@@ -25,6 +25,11 @@ exports.signup = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
+/*exports.signup = (req, res, next) => {
+    console.log(req.body)
+    res.status(201).json({ message: 'Utilisateur créé !' })
+    
+};*/
 
 
 exports.login = (req, res, next) => {

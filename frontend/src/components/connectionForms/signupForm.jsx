@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 
-function Login() {
+function signupForm() {
   return (
     <form action="">
       <div>
@@ -12,9 +12,11 @@ function Login() {
         <label htmlFor="password">mot de passe :</label>
         <input type="password" id=""password name="password"/>
       </div>
-      <Link to="/">Inscrivez-vous</Link>
+      <input type="submit" value="S'inscrire"/>
+
+      <Link to="/">Se connecter</Link>
     </form>
   );
 }
 
-export default Login;
+export default signupForm;
