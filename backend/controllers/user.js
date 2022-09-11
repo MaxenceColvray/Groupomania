@@ -8,7 +8,7 @@ exports.signup = (req, res, next) => {
     Userr.findOne({ email: req.body.email })
         .then((user) => {
             if (user !== null) {
-                res.status(400).json({ error: "un compte existe deja" })
+                return res.status(400).json({ error: "un compte existe deja" })
             } else {
                 bcrypt.hash(req.body.password, 10)
                     .then(hash => {

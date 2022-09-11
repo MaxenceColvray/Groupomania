@@ -6,9 +6,9 @@ let passwordSchema = new passwordValidator();
 
 // Add properties to it
 passwordSchema
-.is().min(6)                                    // Minimum length 8
-.is().max(100)                                  // Maximum length 100
-/*.has().lowercase()                              // Must have lowercase letters
+.is().min(6)                                    // Minimum length 6
+/*.is().max(100)                                  // Maximum length 100
+.has().lowercase()                              // Must have lowercase letters
 .has().digits()                                // Must have at least digits
 .has().not().spaces()                           // Should not have spaces*/
 
