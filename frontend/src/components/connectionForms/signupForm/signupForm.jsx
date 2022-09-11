@@ -1,12 +1,10 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 function SignupForm() {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const signup = (e) => {
     e.preventDefault();
@@ -26,7 +24,7 @@ function SignupForm() {
           errorSignupMsg.textContent = response.status;
         } else {
           errorSignupMsg.textContent = "";
-          navigate("/")
+          navigate("/");
         }
       })
       .catch(() => {
@@ -37,30 +35,30 @@ function SignupForm() {
   return (
     <form>
       <div>
-        <label htmlFor="email">email :</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={inputEmail}
-          onChange={(e) => setInputEmail(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">mot de passe :</label>
-        <input
-          type="password"
-          id=""
-          password
-          name="password"
-          value={inputPassword}
-          onChange={(e) => setInputPassword(e.target.value)}
-        />
-      </div>
-      <input type="submit" value="S'inscrire" onClick={signup} />
+        <div>
+          <label htmlFor="email">email :</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={inputEmail}
+            onChange={(e) => setInputEmail(e.target.value)}
+          />
 
-      <Link to="/">Se connecter</Link>
-      <p id="errorSignupMsg"></p>
+          <label htmlFor="password">mot de passe :</label>
+          <input
+            type="password"
+            id=""
+            password
+            name="password"
+            value={inputPassword}
+            onChange={(e) => setInputPassword(e.target.value)}
+          />
+        </div>
+
+        <input type="submit" value="S'inscrire" onClick={signup} />
+        <p id="errorSignupMsg"></p>
+      </div>
     </form>
   );
 }

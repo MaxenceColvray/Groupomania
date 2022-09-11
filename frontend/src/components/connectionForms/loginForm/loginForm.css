@@ -1,0 +1,22 @@
+
+.box_login_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.box_login_field{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+}
+
+.login_field{
+    margin: 15px;
+}
+
+.submit_login{
+    margin: 15px;
+}
