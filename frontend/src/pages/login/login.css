@@ -1,0 +1,11 @@
+.login{
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login h1{
+    margin: 10px;
+}

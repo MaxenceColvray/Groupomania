@@ -5,6 +5,7 @@ import Header from "./components/header/header";
 import Login from "./pages/login/login";
 import Signup from "./pages/signup/signup";
 import Feed from "./pages/feed/feed";
+import AddPost from "./pages/addPost/addPost"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/feed" element={<Feed />} />
+        <Route path="/addpost" element={<AddPost />} />
       </Routes>
     </React.Fragment>
   );

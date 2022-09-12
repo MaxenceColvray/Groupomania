@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useNavigate } from "react-router-dom";
 import "./loginForm.css";
 
@@ -58,10 +58,12 @@ function LoginForm() {
               onChange={(e) => setInputPasswordd(e.target.value)}
             />
           </div>
+          <div className="errorLoginMsg">
+            <p id="errorLoginMsg"></p>
+          </div>
         </div>
         <div className="submit_login">
-        <input type="submit" value="Se connecter" onClick={login} />
-        <p id="errorLoginMsg"> </p>
+          <input type="submit" value="Se connecter" onClick={login} />
         </div>
       </div>
     </form>

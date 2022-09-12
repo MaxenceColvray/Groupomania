@@ -1,25 +1,15 @@
 const Post = require('../models/post')
 
 exports.postAdd = (req, res, next) => {
-    console.log(req.auth.userId)
+    console.log(req.body.title)
+    const postObjectt = JSON.parse(req.body);
     const post = new Post({
-        title: req.body.title,
-        description: req.body.description
-    });
-    /*const postObject = JSON.parse(req.body.post);
-    const post = new Post({
-        ...postObject,
+        ...postObjectt,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     })
     post.save()
-    .then(() => { res.status(201).json({ message: 'Objet enregistré !' }) })
-    .catch(error => { res.status(400).json({ error }) })*/
-
-    post.save()
     .then(() => res.status(201).json({ message: 'Post créé' }))
-    .catch(error => res.status(400).json({ error }));
-
-    
+    .catch(error => res.status(400).json({ error }))
 };
 
 exports.postsDisplay = (req, res, next) => {

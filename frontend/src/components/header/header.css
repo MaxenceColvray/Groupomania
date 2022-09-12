@@ -6,10 +6,24 @@ header{
     border-bottom: 2px black solid;
 }
 
+.box_header{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
 
 .box_logo{
     width: 450px;
     height: 150px;
+}
+
+.box_header a{
+    width: 100%;
+    text-align: end;
+    margin-right: 30px;
+    /*display: none;*/
 }
 
 .img{

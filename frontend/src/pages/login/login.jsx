@@ -1,14 +1,16 @@
 
 import LoginForm from "../../components/connectionForms/loginForm/loginForm";
 import { Link } from "react-router-dom";
+import "./login.css";
+
 
 function Login() {
   return (
-    <div>
-      <h1>Login</h1>
+    <section className="login">
+      <h1>Connectez vous !</h1>
       <LoginForm/>
       <Link to="/signup">Inscrivez-vous</Link>
-    </div>
+    </section>
   );
 }
 

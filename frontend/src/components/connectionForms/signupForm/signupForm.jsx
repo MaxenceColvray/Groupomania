@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./signupForm.css";
 
 function SignupForm() {
   const [inputEmail, setInputEmail] = useState("");
@@ -34,30 +35,36 @@ function SignupForm() {
 
   return (
     <form>
-      <div>
-        <div>
-          <label htmlFor="email">email :</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={inputEmail}
-            onChange={(e) => setInputEmail(e.target.value)}
-          />
-
-          <label htmlFor="password">mot de passe :</label>
-          <input
-            type="password"
-            id=""
-            password
-            name="password"
-            value={inputPassword}
-            onChange={(e) => setInputPassword(e.target.value)}
-          />
+      <div className="box_signup_form">
+        <div className="box_signup_field">
+          <div className="signup_field">
+            <label htmlFor="email">email :</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={inputEmail}
+              onChange={(e) => setInputEmail(e.target.value)}
+            />
+          </div>
+          <div className="signup_field">
+            <label htmlFor="password">mot de passe :</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={inputPassword}
+              onChange={(e) => setInputPassword(e.target.value)}
+            />
+          </div>
         </div>
-
-        <input type="submit" value="S'inscrire" onClick={signup} />
+        <div className="errorSignupMsg">
         <p id="errorSignupMsg"></p>
+        </div>
+        <div className="submit_signup">
+          <input type="submit" value="S'inscrire" onClick={signup} />
+        </div>
+      
       </div>
     </form>
   );

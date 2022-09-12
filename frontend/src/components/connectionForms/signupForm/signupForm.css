@@ -1,28 +1,27 @@
-
-.box_login_form{
+.box_signup_form{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 
-.box_login_field{
+.box_signup_field{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 
 }
 
-.login_field{
+.signup_field{
     margin: 15px;
 }
 
-.errorLoginMsg{
+.errorSignupMsg{
     width: 100%;
     text-align: center;
     color: red;
 }
 
-.submit_login{
+.submit_signup{
     margin: 15px;
 }
