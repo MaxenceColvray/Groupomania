@@ -25,6 +25,10 @@ function LoginForm() {
           errorLoginMsg.textContent = response.status;
         } else {
           errorLoginMsg.textContent = "";
+          // Création cookie contenant le token
+          /*res.cookie("token", token, { maxAge: jwtExpirySeconds * 1000 })
+          res.end()*/
+
           navigate("/feed");
         }
       })

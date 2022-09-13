@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./postForm.css";
 
 function PostForm() {
   const [inputTitle, setInputTitle] = useState("");
@@ -16,18 +17,20 @@ function PostForm() {
 
   const post = (e) => {
     e.preventDefault();
-    let postObject = { title: inputTitle, description: inputDescription, imageURL: inputUrl  };
+    console.log(document.getElementById("my_file").files[0]);
 
-    const formData  = new FormData();
-    formData.append('title', inputTitle);
-    formData.append('image', document.getElementById('my_file').files);
-    
-    console.log(postObject);
+    const formData = new FormData();
+    formData.append("title", inputTitle);
+    formData.append("description", inputTitle);
+    formData.append("image", document.getElementById("my_file").files[0]);
+
+    console.log(formData);
     fetch("http://localhost:3000/api/post", {
       method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      /*headers: {
+        "Content-Type": "multipart/form-data",
+        "Accept": "application/json",
+      },*/
       body: formData,
     })
       .then((response) => {
@@ -36,9 +39,9 @@ function PostForm() {
         if (response.status !== 201) {
           errorPostMsg.textContent =
             "Tous les champs sont requis.  Erreur: " + response.status;
-            console.log(inputUrl)
+          console.log(inputUrl);
         } else {
-          alert("Votre post " + postObject.title + " a bien été crée");
+          alert("Votre post " + inputTitle + " a bien été crée");
           navigate("/feed");
         }
       })
@@ -48,28 +51,40 @@ function PostForm() {
   };
 
   return (
-    <form /*method="post" enctype="multipart/form-data"*/ >
-      <label htmlFor="title">Titre</label>
-      <input
-        type="text"
-        id="title"
-        name="title"
-        value={inputTitle}
-        onChange={(e) => setInputTitle(e.target.value)}
-      />
+    <form>
+      <div>
+        <label htmlFor="title">Titre</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={inputTitle}
+          onChange={(e) => setInputTitle(e.target.value)}
+        />
+      </div>
 
-      <label htmlFor="description">Description</label>
-      <input
-        type="text"
-        id="description"
-        name="description"
-        value={inputDescription}
-        onChange={(e) => setInputDescription(e.target.value)}
-      />
+      <div>
+        <input
+          id="my_file"
+          type="file"
+          value={inputUrl}
+          onChange={(e) => setinputUrl(e.target.value)}
+        />
+      </div>
 
-      <input id="my_file" type="file" value={inputUrl} onChange={(e) => setinputUrl(e.target.value)} />
+      <div>
+        <label htmlFor="text">Description</label>
+        <textarea
+          name="description"
+          id="description"
+          cols="50"
+          rows="10"
+          value={inputDescription}
+          onChange={(e) => setInputDescription(e.target.value)}
+        ></textarea>
+      </div>
 
-      <input type="submit" value="Poster" onClick={post}/>
+      <input type="submit" value="Poster !" onClick={post} />
 
       <p id="errorPostMsg"></p>
     </form>

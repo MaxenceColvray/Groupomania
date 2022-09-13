@@ -1,11 +1,13 @@
 const Post = require('../models/post')
 
 exports.postAdd = (req, res, next) => {
-    console.log(req.body.title)
-    const postObjectt = JSON.parse(req.body);
+    console.log(req.body)
+    console.log("===< " + req.file.filename)
+   const postObjectt = req.body;
     const post = new Post({
-        ...postObjectt,
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+        title: req.body.title,
+        description: req.body.description,
+        imageURL: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     })
     post.save()
     .then(() => res.status(201).json({ message: 'Post créé' }))

@@ -4,6 +4,10 @@ const app = express();
 app.use(express.json()); //Convertit les requètes Post en objet utilisable
 const path = require('path');
 
+const cors = require('cors')
+ 
+app.use(cors())
+
 
 /*Gère les erreurs de CORS*/
 app.use((req, res, next) => {
