@@ -8,7 +8,7 @@ import "./addPost.css";
 
 function AddPost() {
   return (
-    <section>
+    <section className="addpost">
       <div>
         <h1>Ajouter un post</h1>
         <Link to="/feed"><FontAwesomeIcon icon={faArrowLeft} /></Link>

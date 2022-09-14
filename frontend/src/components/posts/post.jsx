@@ -1,16 +1,21 @@
+import "./post.css"
 
-function Post() {
+
+function Post(props) {
+
+
     return (
       
-        <div className="post">
-            <h2>Mon tuto</h2>
-          <img
-            src={require("../../assets/TUTO_CMS_amenager_bureau_5.jpg")}
-            alt="ùmkm"
-            
-          />
-          <p>voila mon tuto c'est cool</p>
-        </div>
+      <div className="post">
+      <h2>{props.title}</h2>
+      <div className="box_img">
+      <img
+        src={props.imageURL}
+        alt={props.imageURL}
+      />
+      </div>
+      <p>{props.description}</p>
+    </div>
     );
   }
   

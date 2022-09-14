@@ -9,11 +9,7 @@ function PostForm() {
 
   const navigate = useNavigate();
 
-  /*const ss = (e) => {
-    console.log(e.target.files)
-    console.log(e.target.files[0])
 
-  }*/
 
   const post = (e) => {
     e.preventDefault();
@@ -21,16 +17,12 @@ function PostForm() {
 
     const formData = new FormData();
     formData.append("title", inputTitle);
-    formData.append("description", inputTitle);
+    formData.append("description", inputDescription);
     formData.append("image", document.getElementById("my_file").files[0]);
 
     console.log(formData);
     fetch("http://localhost:3000/api/post", {
       method: "post",
-      /*headers: {
-        "Content-Type": "multipart/form-data",
-        "Accept": "application/json",
-      },*/
       body: formData,
     })
       .then((response) => {
@@ -39,7 +31,6 @@ function PostForm() {
         if (response.status !== 201) {
           errorPostMsg.textContent =
             "Tous les champs sont requis.  Erreur: " + response.status;
-          console.log(inputUrl);
         } else {
           alert("Votre post " + inputTitle + " a bien été crée");
           navigate("/feed");
@@ -51,7 +42,7 @@ function PostForm() {
   };
 
   return (
-    <form>
+    <form className="postform">
       <div>
         <label htmlFor="title">Titre</label>
         <input

@@ -1,4 +1,4 @@
-section{
+.addpost{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,13 +6,13 @@ section{
 }
 
 
-section > div{
+.addpost > div{
     display: flex;
     flex-direction: column-reverse;
     width: 60%;
 }
 
-section > div h1{
+.addpost > div h1{
     color: #4E5166;
     margin: 15px;
     margin-top: 0px;
@@ -21,13 +21,13 @@ section > div h1{
 
 }
 
-section > div a{
+.addpost > div a{
     color: #4E5166;
     font-size: 20px;
     transition: 0.3s ease;
 
 }
 
-section > div a:hover{
+.addpost > div a:hover{
     color: #FD2D01;
 }

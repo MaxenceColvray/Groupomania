@@ -1,24 +1,7 @@
-//import Post from "../../components/posts/post";
+import Postcomponent from "../../components/posts/post";
 //import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-
-/*const posts = [
-  {
-    name: "monstera",
-    category: "classique",
-    id: "1ed",
-  },
-  {
-    name: "ficus lyrata",
-    category: "classique",
-    id: "2ab",
-  },
-  {
-    name: "pothos argenté",
-    category: "classique",
-    id: "3sd",
-  },
-];*/
+import "./feed.css"
 
 function Feed() {
   const [posts, setPosts] = useState([]);
@@ -30,7 +13,7 @@ function Feed() {
       })
       .then((result) => {
         console.log(result);
-  
+
         setPosts(result);
         //console.log(posts)                                 Voir avec Thomas !
       })
@@ -40,13 +23,16 @@ function Feed() {
   }, []);
 
   return (
-    <div>
-      {posts.map((post, index) => (
-        <div key={`${post}-${index}`}>
-          <h1>{post.title}</h1>
-        </div>
+    <section className="feed">
+      {posts.map((post) => (
+        <Postcomponent
+          title={post.title}
+          description={post.description}
+          imageURL={post.imageURL}
+          key={post._id}
+        />
       ))}
-    </div>
+    </section>
   );
 }
 
