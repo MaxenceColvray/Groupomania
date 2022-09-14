@@ -1,16 +1,8 @@
-import Post from "../../components/posts/post";
-import { Link } from "react-router-dom";
-import React, { useEffect } from "react";
+//import Post from "../../components/posts/post";
+//import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
-const plantList = [
-  "monstera",
-  "ficus lyrata",
-  "pothos argenté",
-  "yucca",
-  "palmier",
-];
-
-const posts = [
+/*const posts = [
   {
     name: "monstera",
     category: "classique",
@@ -26,15 +18,21 @@ const posts = [
     category: "classique",
     id: "3sd",
   },
-];
+];*/
+
 function Feed() {
+  const [posts, setPosts] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:3000/api/post")
-      .then((response) => {
-        return response.json();
+      .then((res) => {
+        return res.json(); //                                Voir avec thomas !
       })
-      .then((o) => {
-        console.log(o);
+      .then((result) => {
+        console.log(result);
+  
+        setPosts(result);
+        //console.log(posts)                                 Voir avec Thomas !
       })
       .catch((error) => {
         console.log(error);
@@ -43,19 +41,9 @@ function Feed() {
 
   return (
     <div>
-      
-      <Link to="/addpost">Ajouter un post</Link>
       {posts.map((post, index) => (
         <div key={`${post}-${index}`}>
-          <h1>{post.name}</h1> 
-          <p>{post.category}</p>
-          if (post.name == ficus lyrata) {
-            <h1>{post.name}</h1>
-            
-          }
-
-
-
+          <h1>{post.title}</h1>
         </div>
       ))}
     </div>
