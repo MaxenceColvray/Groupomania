@@ -1,18 +1,19 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-const Userr = require('../models/user')
+const User = require('../models/user')
 
 
 exports.signup = (req, res, next) => {
     console.log(req.body)
-    Userr.findOne({ email: req.body.email })
+    User.findOne({ email: req.body.email })
         .then((user) => {
             if (user !== null) {
                 return res.status(400).json({ error: "un compte existe deja" })
             } else {
                 bcrypt.hash(req.body.password, 10)
                     .then(hash => {
-                        const user = new Userr({
+                        const user = new User({
+                            name: req.body.name,
                             email: req.body.email,
                             password: hash
                         });
@@ -25,16 +26,11 @@ exports.signup = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
-/*exports.signup = (req, res, next) => {
-    console.log(req.body)
-    res.status(201).json({ message: 'Utilisateur créé !' })
-    
-};*/
 
 
 exports.login = (req, res, next) => {
     console.log(req.body)
-    Userr.findOne({ email: req.body.email })
+    User.findOne({ email: req.body.email })
         .then(user => {
             if (!user) {
                 return res.status(401).json({ message: 'Paire login/mot de passe incorrecte' });
@@ -45,11 +41,10 @@ exports.login = (req, res, next) => {
                         return res.status(401).json({ message: 'Paire login/mot de passe incorrecte' });
                     }
 
-                    
                     res.status(200).json({
                         userId: user._id,
                         token: jwt.sign(
-                            { userId: user._id },
+                            { userId: user._id/* , isAdmin : user.admin*/ },
                             'RANDOM_TOKEN_SECRET',
                             { expiresIn: '24h' }
                         )

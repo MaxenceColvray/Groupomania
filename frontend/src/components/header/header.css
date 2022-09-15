@@ -19,11 +19,11 @@ header{
     height: 150px;
 }
 
-.box_header a{
+.logout_button{
     width: 100%;
     text-align: end;
     margin-right: 30px;
-    /*display: none;*/
+    display:block
 }
 
 .img{

@@ -18,8 +18,11 @@ function LoginForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginObject),
     })
+    .then(data => {
+      return data.json();
+    })
       .then((response) => {
-        console.log(response.status);
+        console.log(response.status , response);
         let errorLoginMsg = document.getElementById("errorLoginMsg");
         if (response.status !== 200) {
           errorLoginMsg.textContent = response.status;
@@ -29,7 +32,12 @@ function LoginForm() {
           /*res.cookie("token", token, { maxAge: jwtExpirySeconds * 1000 })
           res.end()*/
 
-          navigate("/feed");
+          console.log(response)
+          //LocalStorage
+          //User avec tout 
+          //Soit Token - User (ID + isAdmin)
+
+          // navigate("/feed");
         }
       })
       .catch(() => {

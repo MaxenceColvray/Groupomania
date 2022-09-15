@@ -9,3 +9,8 @@
 .login h1{
     margin: 10px;
 }
+
+.logout_button{
+    display:none
+}
+

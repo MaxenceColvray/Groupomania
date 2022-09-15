@@ -1,10 +1,19 @@
 const Post = require('../models/post')
+const User = require('../models/user')
+
 
 exports.postAdd = (req, res, next) => {
     console.log(req.body)
     console.log("===< " + req.file.filename)
-   const postObjectt = req.body;
+    //
+    User.findOne({ _id: req.auth.userId })
+    .then((user) => {})
+    .catch(error => res.status(400).json({ error }));  
+  
+
+    //
     const post = new Post({
+        userId: req.auth.userId,
         title: req.body.title,
         description: req.body.description,
         imageURL: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,

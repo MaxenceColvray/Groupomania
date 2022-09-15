@@ -8,6 +8,7 @@ function Post(props) {
       
       <div className="post">
       <h2>{props.title}</h2>
+      <h3>{props.name}</h3>
       <div className="box_img">
       <img
         src={props.imageURL}

@@ -7,9 +7,7 @@ function PostForm() {
   const [inputDescription, setInputDescription] = useState("");
   const [inputUrl, setinputUrl] = useState("");
 
-  const navigate = useNavigate();
-
-
+  //const navigate = useNavigate();
 
   const post = (e) => {
     e.preventDefault();
@@ -21,8 +19,12 @@ function PostForm() {
     formData.append("image", document.getElementById("my_file").files[0]);
 
     console.log(formData);
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzIzMjRmOTYwZmQyNDRmYWY5N2VkNTEiLCJpYXQiOjE2NjMyNTE4MzUsImV4cCI6MTY2MzMzODIzNX0.Puo0bAPzNdjKwuHUVYWKYkRLKd9-rNTWAkHRVCIovAw";
     fetch("http://localhost:3000/api/post", {
       method: "post",
+      headers: {
+        authorization: `bearer ${token}`,
+      },
       body: formData,
     })
       .then((response) => {
@@ -33,7 +35,7 @@ function PostForm() {
             "Tous les champs sont requis.  Erreur: " + response.status;
         } else {
           alert("Votre post " + inputTitle + " a bien été crée");
-          navigate("/feed");
+          //navigate("/feed");
         }
       })
       .catch(() => {

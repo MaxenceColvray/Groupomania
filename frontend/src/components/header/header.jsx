@@ -12,7 +12,7 @@ function Header() {
             className="img"
           />
         </div>
-        <Link to="/">Se déconnecter</Link>
+        <Link to="/" className="logout_button">Se déconnecter</Link>
       </div>
     </header>
   );
