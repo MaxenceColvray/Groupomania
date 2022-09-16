@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./loginForm.css";
 
@@ -13,31 +13,37 @@ function LoginForm() {
 
     let loginObject = { email: inputEmaill, password: inputPasswordd };
 
+    let status = 0; //variable pr récupérer response.status avant de return json()
     fetch("http://localhost:3000/api/auth/login", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginObject),
     })
-    .then(data => {
-      return data.json();
-    })
       .then((response) => {
-        console.log(response.status , response);
+        status = response.status;
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+
         let errorLoginMsg = document.getElementById("errorLoginMsg");
-        if (response.status !== 200) {
-          errorLoginMsg.textContent = response.status;
+        if (status !== 200) {
+          errorLoginMsg.textContent = status;
         } else {
           errorLoginMsg.textContent = "";
-          // Création cookie contenant le token
-          /*res.cookie("token", token, { maxAge: jwtExpirySeconds * 1000 })
-          res.end()*/
-
-          console.log(response)
           //LocalStorage
-          //User avec tout 
+          //User avec tout
           //Soit Token - User (ID + isAdmin)
-
-          // navigate("/feed");
+          let user = [];
+          let userObjet = {
+            token: data.token,
+            userId: data.userId
+          };
+          user.push(userObjet);
+          user = JSON.stringify(user);
+          localStorage.setItem("user", user);
+           navigate("/feed");
         }
       })
       .catch(() => {
