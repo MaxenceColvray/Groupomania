@@ -1,7 +1,6 @@
 import "./post.css";
 import { Link } from "react-router-dom";
 
-
 function Post(props) {
   return (
     <div className="post">
@@ -27,7 +26,7 @@ function Post(props) {
 
         <div>
           <button>
-            <Link to="/:postId">
+            <Link to={"/" + props.id}>
               <i class="fa-solid fa-comments"></i>
             </Link>
           </button>

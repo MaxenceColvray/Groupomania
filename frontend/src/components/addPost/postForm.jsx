@@ -30,6 +30,8 @@ function PostForm() {
     })
       .then((response) => {
         console.log(response.status);
+        console.log(response);
+
         let errorPostMsg = document.getElementById("errorPostMsg");
         if (response.status !== 201) {
           errorPostMsg.textContent =
@@ -52,7 +54,7 @@ function PostForm() {
           type="text"
           id="title"
           name="title"
-          value={inputTitle}
+          placeholder="fffff"
           onChange={(e) => setInputTitle(e.target.value)}
         />
       </div>
@@ -61,7 +63,6 @@ function PostForm() {
         <input
           id="my_file"
           type="file"
-          value={inputUrl}
           onChange={(e) => setinputUrl(e.target.value)}
         />
       </div>
@@ -73,7 +74,6 @@ function PostForm() {
           id="description"
           cols="50"
           rows="10"
-          value={inputDescription}
           onChange={(e) => setInputDescription(e.target.value)}
         ></textarea>
       </div>

@@ -1,0 +1,33 @@
+.addpost{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+
+.addpost > div{
+    display: flex;
+    flex-direction: column-reverse;
+    width: 60%;
+}
+
+.addpost > div h1{
+    color: #4E5166;
+    margin: 15px;
+    margin-top: 0px;
+    font-size: 35px;
+    text-align: center;
+
+}
+
+.addpost > div a{
+    color: #4E5166;
+    font-size: 20px;
+    transition: 0.3s ease;
+
+}
+
+.addpost > div a:hover{
+    color: #FD2D01;
+}

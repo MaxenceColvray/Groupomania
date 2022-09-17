@@ -11,18 +11,21 @@ function Feed() {
   // if(!maVariable){
   //return navigate to login
   // }
-  const token = JSON.parse(localStorage.getItem("user"))[0].token;
   useEffect(() => {
     fetch("http://localhost:3000/api/post", {
       method: "GET",
       headers: {
-        authorization: `bearer ${token}`,
+        authorization: `bearer ${JSON.parse(localStorage.getItem("user"))[0].token}`,
       },
     })
       .then((res) => {
+        console.log(res);
+
         return res.json();                            
       })
       .then((result) => {
+        console.log(result);
+
         setPosts(result);           
       })
       .catch((error) => {
@@ -38,6 +41,7 @@ function Feed() {
           title={post.title}
           description={post.description}
           imageURL={post.imageURL}
+          id={post._id}
           key={post._id}
         />
       ))}
