@@ -21,11 +21,10 @@ exports.postAdd = (req, res, next) => {
 };
 
 exports.modifyPost = (req, res, next) => {
-    console.log("merde")
     console.log(req.body.title)
     console.log(req.body.description)
-
     console.log(req.file)
+
     Post.updateOne({ _id: req.params.id }, {
         title: req.body.title,
         description: req.body.description,
