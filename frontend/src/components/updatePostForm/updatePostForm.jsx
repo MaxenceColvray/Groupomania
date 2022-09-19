@@ -10,40 +10,17 @@ import "./updatePostForm.css";
   const navigate = useNavigate();
   const varUrl = useParams();
   console.log(title)
-  let a = title
-  console.log(a)
 
 
-  const [inputTitle, setInputTitle] = useState(a);
+  const [inputTitle, setInputTitle] = useState(title); //Ici je récup ma props title que j'insére dans ma state.
+  // Ensuite je fais appel à ma state dans la value de InputTitle comme tu peux le voir plus bas.
+  //Le probleme est que ma value ne s'affiche pas dans mon input quand j'utilise une props
+  
   const [inputDescription, setInputDescription] = useState("");
   const [inputUrl, setinputUrl] = useState("");
 
 
-  /*const [getTitleValue, setgetTitleValue] = useState("");
-  //const [getDescriptionValue, setgetDescriptionValue] = useState("");
-  //const [getUrlValue, setgetUrlValue] = useState("");
-
-   const si = await fetch("http://localhost:3000/api/post/" + varUrl.id, {
-    method: "get",
-    headers: {
-      authorization: `bearer ${
-        JSON.parse(localStorage.getItem("user"))[0].token
-      }`,
-    },
-  })
-  .then((res) => {
-      console.log(res);
-      return res.json();
-    })
-     .then((result) => {
-     console.log(result);
-
-
-      //setgetTitleValue(result.title);
-    })
-    .catch(() => {
-      console.log("erreur");
-    });*/
+  
 
   const modifyPost = (e) => {
     e.preventDefault();
