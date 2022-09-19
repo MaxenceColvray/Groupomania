@@ -15,18 +15,42 @@ function Feed() {
     fetch("http://localhost:3000/api/post", {
       method: "GET",
       headers: {
-        authorization: `bearer ${JSON.parse(localStorage.getItem("user"))[0].token}`,
+        authorization: `bearer ${
+          JSON.parse(localStorage.getItem("user"))[0].token
+        }`,
       },
     })
       .then((res) => {
         console.log(res);
 
-        return res.json();                            
+        return res.json();
       })
-      .then((result) => {
-        console.log(result);
+      .then((data) => {
+        console.log(data);
 
-        setPosts(result);           
+
+        let newpostsArray = [];
+        data.map((objet) => {
+          let isMyPostValue = false;
+
+          if (objet.userId === JSON.parse(localStorage.getItem("user"))[0].userId) {
+            isMyPostValue = true;
+          }         
+
+          let newObjet = {
+            name: objet.name,
+            title: objet.title,
+            description: objet.description,
+            imageURL: objet.imageURL,
+            likes: objet.likes,
+            _id: objet._id,
+            isMyPost: isMyPostValue,
+            hadLiked: objet.usersLiked.includes(objet.userId)
+          };
+          newpostsArray.push(newObjet);
+        });
+        console.log(newpostsArray)
+        setPosts(newpostsArray);
       })
       .catch((error) => {
         console.log(error);
@@ -41,8 +65,11 @@ function Feed() {
           title={post.title}
           description={post.description}
           imageURL={post.imageURL}
+          likes={post.likes}
           id={post._id}
           key={post._id}
+          isMyPost={post.isMyPost}
+          hadLiked={post.hadLiked}
         />
       ))}
     </section>

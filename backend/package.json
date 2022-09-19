@@ -18,6 +18,7 @@
     "mongoose": "^6.5.3",
     "mongoose-unique-validator": "^3.1.0",
     "password-validator": "^5.3.0",
+    "prop-types": "^15.8.1",
     "react-icons": "^4.4.0"
   }
 }

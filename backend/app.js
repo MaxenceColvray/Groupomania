@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 app.use(express.json()); //Convertit les requètes Post en objet utilisable
+
 const path = require('path');
 
 const cors = require('cors')

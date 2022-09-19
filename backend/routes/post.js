@@ -10,6 +10,9 @@ router.get('/', auth, postCtrl.postsDisplay);
 router.get('/:id', auth, postCtrl.postDisplay)
 router.put('/:id', auth, multer, postCtrl.modifyPost);
 
+router.put('/:id/like', auth, postCtrl.Liked);
+
+
 
 
 

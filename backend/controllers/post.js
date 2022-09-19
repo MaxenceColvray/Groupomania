@@ -11,6 +11,8 @@ exports.postAdd = (req, res, next) => {
                 title: req.body.title,
                 description: req.body.description,
                 imageURL: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+                likes: 0,
+                usersLiked: []       
             })
             console.log(post)
             post.save()
@@ -33,28 +35,6 @@ exports.modifyPost = (req, res, next) => {
     })
         .then(() => res.status(200).json({ message: 'Objet modifié!' }))
         .catch(error => res.status(401).json({ error }));
-
-
-    /*const sauceObject = req.file ? {
-        ...JSON.parse(req.body.sauce),
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    } : { ...req.body };
-    Sauce.findOne({ _id: req.params.id })
-        .then((sauce) => {
-            if (sauce.userId != req.auth.userId) {
-                res.status(401).json({ message: 'Not authorized' });
-            } else {
-                const filename = sauce.imageUrl.split('/images/')[1]
-                fs.unlink(`images/${filename}`, () => {
-                    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-                        .then(() => res.status(200).json({ message: 'Objet modifié!' }))
-                        .catch(error => res.status(401).json({ error }));
-                })
-            }
-        })
-        .catch((error) => {
-            res.status(400).json({ error });
-        });*/
 };
 
 exports.postsDisplay = (req, res, next) => {
@@ -69,4 +49,59 @@ exports.postDisplay = (req, res, next) => {
     Post.findOne({ _id: req.params.id })
         .then(post => res.status(200).json(post))
         .catch(error => res.status(404).json({ error }));
+};
+
+
+exports.Liked = (req, res, next) => {
+    console.log(req.body.like)
+
+    //console.log(JSON.parse(req.body))
+    //console.log(req.auth.userId)
+
+
+    switch (req.body.like) {
+        case 1:
+            Post.updateOne({ _id: req.body._id }, {
+                $push: { usersLiked: req.auth.userId },
+                $inc: { likes: 1 }
+            })
+            .then((a) => res.status(200).json(a))
+                //.then(() => res.status(200).json({ message: 'Objet modifié !' }))
+                .catch(error => res.status(400).json({ error }))
+            break
+        case 0:
+            Post.updateOne({ _id: req.body._id }, {
+                $pull: { usersLiked: req.auth.userId },
+                $inc: { likes: -1 }
+            })
+            //Post.findOne({ _id: req.params.id })
+            .then((a) => res.status(200).json(a))
+                //.then(() => res.status(200).json({ message: 'Objet modifié !' }))
+                .catch(error => res.status(400).json({ error }))
+
+            /*Sauce.findOne({ _id: req.params.id })
+                .then((sauce) => {
+                    if (sauce.usersLiked.includes(req.body.userId)) {
+                        Sauce.updateOne({ _id: req.params.id }, {
+                            $pull: { usersLiked: req.body.userId },
+                            $inc: { likes: -1 }
+                        })
+                            .then(() => res.status(200).json({ message: 'Objet modifié !' }))
+                            .catch(error => res.status(400).json({ error }))
+                    } else if (sauce.usersDisliked.includes(req.body.userId)) {
+                        Sauce.updateOne({ _id: req.params.id }, {
+                            $pull: { usersDisliked: req.body.userId },
+                            $inc: { dislikes: -1 }
+                        })
+                            .then(() => res.status(200).json({ message: 'Objet modifié !' }))
+                            .catch(error => res.status(400).json({ error }))
+                    } else {
+                        console.log('erreur')
+                        res.status(400).json({ message: 'erreur' })
+                    }
+                })*/
+            break
+        default:
+            res.status(400).json({ message: 'erreur !' })
+    }
 };

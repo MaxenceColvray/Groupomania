@@ -1,15 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import PropTypes from 'prop-types'
+
 
 import "./updatePostForm.css";
 
- function UpdatePostForm() {
+ function UpdatePostForm({title}) {
+
   const navigate = useNavigate();
   const varUrl = useParams();
+  console.log(title)
+  let a = title
+  console.log(a)
 
-  const [inputTitle, setInputTitle] = useState("");
+
+  const [inputTitle, setInputTitle] = useState(a);
   const [inputDescription, setInputDescription] = useState("");
   const [inputUrl, setinputUrl] = useState("");
+
 
   /*const [getTitleValue, setgetTitleValue] = useState("");
   //const [getDescriptionValue, setgetDescriptionValue] = useState("");
@@ -83,7 +91,7 @@ import "./updatePostForm.css";
           type="text"
           id="title"
           name="title"
-          //value={inputTitle}
+          value= {inputTitle}
           onChange={(e) => setInputTitle(e.target.value)}
         />
       </div>
@@ -114,6 +122,10 @@ import "./updatePostForm.css";
       <p id="errorPostMsg"></p>
     </form>
   );
+}
+
+UpdatePostForm.propTypes = {
+  title: PropTypes.string,
 }
 
 export default UpdatePostForm;
