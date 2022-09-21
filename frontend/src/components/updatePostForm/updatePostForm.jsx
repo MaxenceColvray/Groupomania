@@ -2,36 +2,20 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-
 import "./updatePostForm.css";
 
- function UpdatePostForm({title}) {
-
+function UpdatePostForm(props) {
   const navigate = useNavigate();
   const varUrl = useParams();
-  // console.log(varUrl)
-  console.log(title)
-  
-  
+
   const [inputTitle, setInputTitle] = useState("");
-  console.log(inputTitle)
-
-  useEffect(() => {
-    setInputTitle(title)
-    
-  }, [title]);
-  // if(!inputTitle){
-  //   setInputTitle(title)
-  // }
-
-  console.log(inputTitle)
-   //Ici je récup ma props title que j'insére dans ma state.
-  // Ensuite je fais appel à ma state dans la value de InputTitle comme tu peux le voir plus bas.
-  //Le probleme est que ma value ne s'affiche pas dans mon input quand j'utilise une props
-
   const [inputDescription, setInputDescription] = useState("");
-  const [inputUrl, setinputUrl] = useState("");
-
+  useEffect(() => {
+    setInputTitle(props.title);
+  }, [props.title]);
+  useEffect(() => {
+    setInputDescription(props.description);
+  }, [props.description]);
 
 
   const modifyPost = (e) => {
@@ -74,7 +58,6 @@ import "./updatePostForm.css";
   const deletePost = (e) => {
     e.preventDefault();
 
-
     fetch("http://localhost:3000/api/post/" + varUrl.id, {
       method: "delete",
       headers: {
@@ -93,7 +76,7 @@ import "./updatePostForm.css";
             "Tous les champs sont requis.  Erreur: " + response.status;
         } else {
           alert("Votre post '" + inputTitle + "' a bien été supprimé");
-          //navigate("/feed");
+          navigate("/feed");
         }
       })
       .catch(() => {
@@ -109,18 +92,14 @@ import "./updatePostForm.css";
           type="text"
           id="title"
           name="title"
-          value= {inputTitle}
+          value={inputTitle}
           onChange={(e) => setInputTitle(e.target.value)}
         />
       </div>
 
       <div>
-        <input
-          id="my_file"
-          type="file"
-          value={inputUrl}
-          onChange={(e) => setinputUrl(e.target.value)}
-        />
+        <input id="my_file" type="file" />
+        <img src={props.imageURL} alt={props.imageURL} />
       </div>
 
       <div>
@@ -143,6 +122,5 @@ import "./updatePostForm.css";
     </form>
   );
 }
-
 
 export default UpdatePostForm;

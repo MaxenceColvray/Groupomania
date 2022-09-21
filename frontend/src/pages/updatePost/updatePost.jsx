@@ -12,9 +12,10 @@ function UpdatePost() {
 
 
   const [getTitleValue, setgetTitleValue] = useState("");
+  const [getDescriptionValue, setgetDescriptionValue] = useState("");
+  const [getUrlValue, setgetUrlValue] = useState("");
 
 
-// call api ////////////////////////////
 fetch("http://localhost:3000/api/post/" + varUrl.id, {
       method: "GET",
       headers: {
@@ -31,20 +32,12 @@ fetch("http://localhost:3000/api/post/" + varUrl.id, {
       .then((response) => {
         console.log(response);
         setgetTitleValue(response.title)
-
-
+        setgetDescriptionValue(response.description)
+        setgetUrlValue(response.imageURL)
       })
       .catch((error) => {
         console.log(error);
       });
-
-
-//////////////////////////////////////
-
-
-
-
-
 
 
 
@@ -55,7 +48,10 @@ fetch("http://localhost:3000/api/post/" + varUrl.id, {
         <Link to="/feed"><FontAwesomeIcon icon={faArrowLeft} /></Link>
       </div>
       <UpdatePostForm 
-      title={getTitleValue}/>
+      title={getTitleValue}
+      description={getDescriptionValue}
+      imageURL={getUrlValue}
+      />
     </section>
   );
 }

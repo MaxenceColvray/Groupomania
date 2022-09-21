@@ -27,17 +27,31 @@ exports.modifyPost = (req, res, next) => {
     Post.findOne({ _id: req.params.id })
         .then((post) => {
             if (post.userId == req.auth.userId || req.auth.userId == req.auth.userIdAdmin) {
-                Post.updateOne({ _id: req.params.id }, {
-                    title: req.body.title,
-                    description: req.body.description,
-                    imageURL: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-                    _id: req.params.id
-                })
-                    .then(() => res.status(200).json({ message: 'Objet modifié!' }))
-                    .catch(error => res.status(401).json({ error }));
+
+                if (req.file) {
+                    const postObject = {
+                        title: req.body.title,
+                        description: req.body.description,
+                        imageURL: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+                    }
+                    const filename = post.imageURL.split('/images/')[1]
+                    fs.unlink(`images/${filename}`, () => {
+                        Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
+                            .then(() => res.status(200).json({ message: 'Objet modifié!' }))
+                            .catch(error => res.status(401).json({ error }));
+                    })
+                } else {
+                    const postObject = {
+                        title: req.body.title,
+                        description: req.body.description,
+                    }
+                    Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
+                        .then(() => res.status(200).json({ message: 'Objet modifié!' }))
+                        .catch(error => res.status(401).json({ error }));
+                }
+
             } else {
                 res.status(401).json({ message: 'Not authorized' });
-
             }
         })
         .catch((error) => {

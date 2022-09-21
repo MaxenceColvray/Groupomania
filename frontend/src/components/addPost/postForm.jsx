@@ -54,7 +54,6 @@ function PostForm() {
           type="text"
           id="title"
           name="title"
-          placeholder="fffff"
           onChange={(e) => setInputTitle(e.target.value)}
         />
       </div>

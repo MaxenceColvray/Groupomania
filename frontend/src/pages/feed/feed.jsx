@@ -2,7 +2,6 @@ import Postcomponent from "../../components/posts/post";
 //import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import Header from "../../components/header/header";
-
 import "./feed.css";
 
 function Feed() {
