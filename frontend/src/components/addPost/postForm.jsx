@@ -5,7 +5,6 @@ import "./postForm.css";
 function PostForm() {
   const [inputTitle, setInputTitle] = useState("");
   const [inputDescription, setInputDescription] = useState("");
-  const [inputUrl, setinputUrl] = useState("");
 
   const navigate = useNavigate();
 
@@ -48,7 +47,8 @@ function PostForm() {
 
   return (
     <form className="postform">
-      <div>
+      <h2 className="postForm_title">Modifier votre post</h2>
+      <div className="post_field">
         <label htmlFor="title">Titre</label>
         <input
           type="text"
@@ -58,15 +58,15 @@ function PostForm() {
         />
       </div>
 
-      <div>
+      <div className="post_field">
         <input
           id="my_file"
           type="file"
-          onChange={(e) => setinputUrl(e.target.value)}
+          name="file"
         />
       </div>
 
-      <div>
+      <div className="post_field">
         <label htmlFor="text">Description</label>
         <textarea
           name="description"
@@ -77,7 +77,7 @@ function PostForm() {
         ></textarea>
       </div>
 
-      <input type="submit" value="Poster !" onClick={post} />
+      <input type="submit" value="Poster !" className="PostForm_submit" onClick={post} />
 
       <p id="errorPostMsg"></p>
     </form>

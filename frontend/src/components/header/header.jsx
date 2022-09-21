@@ -6,11 +6,16 @@ function Header(props) {
   return (
     <header className="header">
       <div className="box_header">
-        <div className="logo">
+        <div className="box_logo">
           <img
             src={require("../../assets/icon-left-font.png")}
             alt="Logo Groupomania"
-            className="img"
+            className="logo_desktop"
+          />
+          <img
+            src={require("../../assets/logo_mobile.png")}
+            alt="Logo Groupomania"
+            className="logo_mobile"
           />
         </div>
         <Nav

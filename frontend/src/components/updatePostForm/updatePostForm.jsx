@@ -17,7 +17,6 @@ function UpdatePostForm(props) {
     setInputDescription(props.description);
   }, [props.description]);
 
-
   const modifyPost = (e) => {
     e.preventDefault();
     console.log(document.getElementById("my_file").files[0]);
@@ -85,8 +84,9 @@ function UpdatePostForm(props) {
   };
 
   return (
-    <form className="postform">
-      <div>
+    <form className="update_postform">
+      <h2 className="loginForm_title">Modifier votre post</h2>
+      <div className="update_field">
         <label htmlFor="title">Titre</label>
         <input
           type="text"
@@ -97,12 +97,14 @@ function UpdatePostForm(props) {
         />
       </div>
 
-      <div>
+      <div className="update_field">
         <input id="my_file" type="file" />
-        <img src={props.imageURL} alt={props.imageURL} />
+        <div className="box_img_input">
+          <img src={props.imageURL} alt={props.imageURL} />
+        </div>
       </div>
 
-      <div>
+      <div className="update_field">
         <label htmlFor="text">Description</label>
         <textarea
           name="description"
@@ -113,10 +115,11 @@ function UpdatePostForm(props) {
           onChange={(e) => setInputDescription(e.target.value)}
         ></textarea>
       </div>
+      <div className="box_submit">
+      <input type="submit" value=" Modifier le Post"  className="UpdateForm_submit" onClick={modifyPost} />
 
-      <input type="submit" value=" Modifier le Post" onClick={modifyPost} />
-
-      <input type="submit" value=" supprimer le Post" onClick={deletePost} />
+      <input type="submit" value=" supprimer le Post"  className="UpdateForm_delete" onClick={deletePost} />
+      </div>
 
       <p id="errorPostMsg"></p>
     </form>

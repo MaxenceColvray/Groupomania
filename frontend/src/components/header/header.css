@@ -1,25 +1,47 @@
 header {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    margin-bottom: 50px;
-   
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  margin-bottom: 50px;
 }
 
 .box_header {
-    display: flex;
-    max-width: 550px;
-    width: 100%;
+  display: flex;
+  max-width: 550px;
+  width: 100%;
 }
 
-.logo {
-    width: 325px;
-    height: 39px;
+.box_logo {
+  width: 325px;
+  height: 39px;
 }
 
-.img {
+.logo_desktop {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.logo_mobile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+  .logo_desktop {
+    display: none;
+  }
+  .logo_mobile {
+    display: block;
+  }
+
+  .box_logo {
+    width: 49px;
+    height: 43px;
+    padding: 3px 0 0 3px;
+  }
+
+
 }

@@ -1,9 +1,9 @@
 import UpdatePostForm from "../../components/updatePostForm/updatePostForm";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import React from "react";
 
+import Header from "../../components/header/header";
 import "./updatePost.css";
 
 function UpdatePost() {
@@ -42,17 +42,22 @@ fetch("http://localhost:3000/api/post/" + varUrl.id, {
 
 
   return (
+    <React.Fragment>
+      <Header
+        logout={false}
+        addPost={false}
+        backtoFeed={true}
+        signup={false}
+        login={false}
+      />
     <section className="addpost">
-      <div>
-        <h1>Modifier un post</h1>
-        <Link to="/feed"><FontAwesomeIcon icon={faArrowLeft} /></Link>
-      </div>
       <UpdatePostForm 
       title={getTitleValue}
       description={getDescriptionValue}
       imageURL={getUrlValue}
       />
     </section>
+    </React.Fragment>
   );
 }
 
