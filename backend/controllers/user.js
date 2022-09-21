@@ -55,3 +55,12 @@ exports.login = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 }
+
+exports.verify = (req, res, next) => {
+    console.log(req.auth.userId)
+    User.findOne({ _id: req.auth.userId })
+        .then(user => res.status(200).json(user))
+        .catch(error => res.status(400).json({ error }));
+}
+
+

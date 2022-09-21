@@ -32,18 +32,15 @@ function LoginForm() {
           errorLoginMsg.textContent = status;
         } else {
           errorLoginMsg.textContent = "";
-          //LocalStorage
-          //User avec tout
-          //Soit Token - User (ID + isAdmin)
           let user = [];
           let userObjet = {
             token: data.token,
-            userId: data.userId
+            userId: data.userId,
           };
           user.push(userObjet);
           user = JSON.stringify(user);
           localStorage.setItem("user", user);
-           navigate("/feed");
+          navigate("/feed");
         }
       })
       .catch(() => {
@@ -52,38 +49,38 @@ function LoginForm() {
   };
 
   return (
-    <form>
-      <div className="box_login_form">
-        <div className="box_login_field">
-          <div className="login_field">
-            <label htmlFor="email">email :</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={inputEmaill}
-              onChange={(e) => setInputEmaill(e.target.value)}
-            />
-          </div>
-          <div className="login_field">
-            <label htmlFor="password">mot de passe :</label>
-            <input
-              type="password"
-              id=""
-              password
-              name="password"
-              value={inputPasswordd}
-              onChange={(e) => setInputPasswordd(e.target.value)}
-            />
-          </div>
-          <div className="errorLoginMsg">
-            <p id="errorLoginMsg"></p>
-          </div>
-        </div>
-        <div className="submit_login">
-          <input type="submit" value="Se connecter" onClick={login} />
-        </div>
+    <form className="loginForm">
+      <h2 className="loginForm_title">Se connecter</h2>
+      <div className="login_field">
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          onChange={(e) => setInputEmaill(e.target.value)}
+        />
       </div>
+
+      <div className="login_field">
+        <label htmlFor="password">Mot de passe</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          onChange={(e) => setInputPasswordd(e.target.value)}
+        />
+      </div>
+
+      <div className="errorLoginMsg">
+        <p id="errorLoginMsg"></p>
+      </div>
+
+      <input
+        type="submit"
+        value="Se connecter"
+        className="loginForm_submit"
+        onClick={login}
+      />
     </form>
   );
 }

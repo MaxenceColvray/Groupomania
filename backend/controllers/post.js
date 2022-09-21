@@ -1,5 +1,6 @@
 const Post = require('../models/post')
 const User = require('../models/user')
+const fs = require('fs');
 
 
 exports.postAdd = (req, res, next) => {
@@ -12,7 +13,7 @@ exports.postAdd = (req, res, next) => {
                 description: req.body.description,
                 imageURL: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
                 likes: 0,
-                usersLiked: []       
+                usersLiked: []
             })
             console.log(post)
             post.save()
@@ -23,26 +24,35 @@ exports.postAdd = (req, res, next) => {
 };
 
 exports.modifyPost = (req, res, next) => {
-    console.log(req.body.title)
-    console.log(req.body.description)
-    console.log(req.file)
+    Post.findOne({ _id: req.params.id })
+        .then((post) => {
+            if (post.userId == req.auth.userId || req.auth.userId == req.auth.userIdAdmin) {
+                Post.updateOne({ _id: req.params.id }, {
+                    title: req.body.title,
+                    description: req.body.description,
+                    imageURL: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+                    _id: req.params.id
+                })
+                    .then(() => res.status(200).json({ message: 'Objet modifié!' }))
+                    .catch(error => res.status(401).json({ error }));
+            } else {
+                res.status(401).json({ message: 'Not authorized' });
 
-    Post.updateOne({ _id: req.params.id }, {
-        title: req.body.title,
-        description: req.body.description,
-        imageURL: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-        _id: req.params.id
-    })
-        .then(() => res.status(200).json({ message: 'Objet modifié!' }))
-        .catch(error => res.status(401).json({ error }));
+            }
+        })
+        .catch((error) => {
+            res.status(400).json({ error });
+        });
 };
 
 exports.postsDisplay = (req, res, next) => {
-    //console.log(req.auth.userId)
+    console.log(req.auth.userId)
     Post.find()
         .then(posts => res.status(200).json(posts))
         .catch(error => res.status(400).json({ error }));
 };
+
+
 
 exports.postDisplay = (req, res, next) => {
     console.log(req.params.id)
@@ -52,21 +62,36 @@ exports.postDisplay = (req, res, next) => {
 };
 
 
+exports.deletePost = (req, res, next) => {
+    Post.findOne({ _id: req.params.id })
+        .then(post => {
+            if (post.userId == req.auth.userId || req.auth.userId == req.auth.userIdAdmin) {
+                console.log(post.imageURL)
+                const filename = post.imageURL.split('/images/')[1];
+                console.log(filename)
+                fs.unlink(`images/${filename}`, () => {
+                    Post.deleteOne({ _id: req.params.id })
+                        .then(() => { res.status(200).json({ message: 'Objet supprimé !' }) })
+                        .catch(error => res.status(401).json({ error }));
+                });
+            } else {
+                res.status(401).json({ message: 'Not authorized' });
+            }
+        })
+        .catch(error => {
+            res.status(500).json({ error });
+        });
+};
+
+
 exports.Liked = (req, res, next) => {
-    console.log(req.body.like)
-
-    //console.log(JSON.parse(req.body))
-    //console.log(req.auth.userId)
-
-
     switch (req.body.like) {
         case 1:
             Post.updateOne({ _id: req.body._id }, {
                 $push: { usersLiked: req.auth.userId },
                 $inc: { likes: 1 }
             })
-            .then((a) => res.status(200).json(a))
-                //.then(() => res.status(200).json({ message: 'Objet modifié !' }))
+                .then((a) => res.status(200).json(a))
                 .catch(error => res.status(400).json({ error }))
             break
         case 0:
@@ -74,32 +99,10 @@ exports.Liked = (req, res, next) => {
                 $pull: { usersLiked: req.auth.userId },
                 $inc: { likes: -1 }
             })
-            //Post.findOne({ _id: req.params.id })
-            .then((a) => res.status(200).json(a))
+                //Post.findOne({ _id: req.params.id })
+                .then((a) => res.status(200).json(a))
                 //.then(() => res.status(200).json({ message: 'Objet modifié !' }))
                 .catch(error => res.status(400).json({ error }))
-
-            /*Sauce.findOne({ _id: req.params.id })
-                .then((sauce) => {
-                    if (sauce.usersLiked.includes(req.body.userId)) {
-                        Sauce.updateOne({ _id: req.params.id }, {
-                            $pull: { usersLiked: req.body.userId },
-                            $inc: { likes: -1 }
-                        })
-                            .then(() => res.status(200).json({ message: 'Objet modifié !' }))
-                            .catch(error => res.status(400).json({ error }))
-                    } else if (sauce.usersDisliked.includes(req.body.userId)) {
-                        Sauce.updateOne({ _id: req.params.id }, {
-                            $pull: { usersDisliked: req.body.userId },
-                            $inc: { dislikes: -1 }
-                        })
-                            .then(() => res.status(200).json({ message: 'Objet modifié !' }))
-                            .catch(error => res.status(400).json({ error }))
-                    } else {
-                        console.log('erreur')
-                        res.status(400).json({ message: 'erreur' })
-                    }
-                })*/
             break
         default:
             res.status(400).json({ message: 'erreur !' })

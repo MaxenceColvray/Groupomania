@@ -2,19 +2,16 @@ import UpdatePostForm from "../../components/updatePostForm/updatePostForm";
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import PropTypes from 'prop-types'
-
-
-
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 import "./updatePost.css";
 
 function UpdatePost() {
   const varUrl = useParams();
+  console.log(varUrl);
+
 
   const [getTitleValue, setgetTitleValue] = useState("");
-  const [getDescriptionValue, setgetDescriptionValue] = useState("");
 
 
 // call api ////////////////////////////
@@ -34,8 +31,6 @@ fetch("http://localhost:3000/api/post/" + varUrl.id, {
       .then((response) => {
         console.log(response);
         setgetTitleValue(response.title)
-        setgetDescriptionValue(response.description)
-
 
 
       })

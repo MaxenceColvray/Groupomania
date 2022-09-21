@@ -1,17 +1,21 @@
 import LoginForm from "../../components/connectionForms/loginForm/loginForm";
 import React from "react";
-import Nav from "../../components/nav/nav";
-import { Link } from "react-router-dom";
+import Header from "../../components/header/header";
+
 import "./login.css";
 
 function Login() {
   return (
     <React.Fragment>
-      <Nav logout={false} addPost={false} backtoFeed={true} />
+      <Header
+        logout={false}
+        addPost={false}
+        backtoFeed={false}
+        signup={true}
+        login={false}
+      />
       <section className="login">
-        <h1>Connectez vous !</h1>
         <LoginForm />
-        <Link to="/signup">Inscrivez-vous</Link>
       </section>
     </React.Fragment>
   );

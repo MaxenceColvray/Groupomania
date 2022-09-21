@@ -1,15 +1,22 @@
 import SignupForm from "../../components/connectionForms/signupForm/signupForm";
-import { Link } from "react-router-dom";
+import React from "react";
+import Header from "../../components/header/header";
 import "./signup.css";
-
 
 function signup() {
   return (
-    <section className="signup">
-      <h1>Inscrivez vous !</h1>
-      <SignupForm />
-      <Link to="/">Se connecter</Link>
-    </section>
+    <React.Fragment>
+      <Header
+        logout={false}
+        addPost={false}
+        backtoFeed={false}
+        signup={false}
+        login={true}
+      />
+      <section className="signup">
+        <SignupForm />
+      </section>
+    </React.Fragment>
   );
 }
 

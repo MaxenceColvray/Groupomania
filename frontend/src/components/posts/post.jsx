@@ -3,16 +3,19 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function Post(props) {
+  console.log(props.hadLiked);
   const [isClicked, setisClicked] = useState(props.hadLiked);
+  const [likes, setlikes] = useState(props.likes);
 
   
-  //props.hadLiked ? setisClicked(true) : setisClicked(false);
-
-
+  console.log(props.isMyPost);
   console.log(props.hadLiked);
+  console.log(props.id);
+
   const like = (e) => {
     e.preventDefault();
     setisClicked(true);
+    setlikes(likes + 1 )
     const objectLike = {
       _id: props.id,
       like: 1,
@@ -28,6 +31,7 @@ function Post(props) {
       body: JSON.stringify(objectLike),
     })
       .then((res) => {
+
         return res.json();
       })
       .then((response) => {
@@ -41,6 +45,7 @@ function Post(props) {
   const removelike = (e) => {
     e.preventDefault();
     setisClicked(false);
+    setlikes(likes - 1 )
     const objectLike = {
       _id: props.id,
       like: 0,
@@ -54,16 +59,9 @@ function Post(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(objectLike),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).catch((err) => {
+      console.log(err);
+    });
   };
 
   return (
@@ -82,36 +80,40 @@ function Post(props) {
       </div>
       <div className="social_bar">
         <div>
-          {isClicked ? (
-            <div>
-              <button onClick={removelike} className="displayGreen">
-                <i className="fa-regular fa-thumbs-up"></i>
+          {isClicked /*|| props.hadLiked*/ ? (
+            <div className="box_like">
+              <button onClick={removelike} className="red_like like_button">
+                <i className="fa-solid fa-thumbs-up"></i>
               </button>
-              <p>{props.likes + 1}</p>
+              {/* {props.hadLiked ? (
+                <p className="likes_counter">{props.likes}</p>
+              ) : (
+                <p className="likes_counter">{props.likes + 1}</p>
+              )} */}
+              <p className="likes_counter">{likes}</p>
             </div>
           ) : (
-            <div>
-              <button onClick={like}>
-                <i className="fa-regular fa-thumbs-up"></i>
+            <div className="box_like">
+              <button onClick={like} className="like_button">
+                <i className="fa-solid fa-thumbs-up"></i>
               </button>
-              <p>{props.likes}</p>
+              {/* {props.hadLiked ? (
+                <p className="likes_counter">{props.likes - 1}</p>
+              ) : (
+                <p className="likes_counter">{props.likes}</p>
+              )} */}
+              <p className="likes_counter">{likes}</p>
             </div>
           )}
         </div>
 
-        <div>
-          {props.isMyPost ? (
-            <button>
-              <Link to={"/" + props.id}>
-                <i className="fa-solid fa-comments"></i>
-              </Link>
-            </button>
+        <div className="box_social_button">
+          {props.isMyPost || props.isAdmin ? (
+            <Link to={"/" + props.id}>
+              <i className="fa-solid fa-gear"></i>
+            </Link>
           ) : (
-            <button>
-              <Link to="/">
-                <i className="fa-regular fa-thumbs-up"></i>
-              </Link>
-            </button>
+            <p></p>
           )}
         </div>
       </div>
