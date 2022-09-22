@@ -47,7 +47,7 @@ function PostForm() {
 
   return (
     <form className="postform">
-      <h2 className="postForm_title">Modifier votre post</h2>
+      <h2 className="postForm_title">Ajouter un post</h2>
       <div className="post_field">
         <label htmlFor="title">Titre</label>
         <input

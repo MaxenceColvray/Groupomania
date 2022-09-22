@@ -17,10 +17,6 @@ const logout = (()=>{
                 {props.backtoFeed ? <Link to="/feed" className="nav_button">retour</Link>:"" }
                 {props.signup ? <Link to="/signup" className="nav_button">s'inscrire</Link>:"" }
                 {props.login ? <Link to="/" className="nav_button">se connecter</Link>:"" }
-
-
-
-
     </div>
     );
   }
