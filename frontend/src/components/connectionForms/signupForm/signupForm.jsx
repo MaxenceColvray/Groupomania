@@ -25,11 +25,11 @@ function validate_form() {
       "NameErrorMsg",
       new RegExp("[^a-zA-Z- àâäéèêëïîôöùûüÿç]")
     ) ||
-    !validate_field(
+    /*!validate_field(
       "email",
       "EmailErrorMsg",
       new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
-    ) ||
+    ) ||*/
     !validate_field(
       "password",
       "PasswordErrorMsg",
