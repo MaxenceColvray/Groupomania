@@ -58,7 +58,7 @@ function SignupForm() {
         password: inputPassword,
       };
 
-      fetch("http://localhost:3000/api/auth/signup", {
+      fetch("http://51.91.99.62:3000/api/auth/signup", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
