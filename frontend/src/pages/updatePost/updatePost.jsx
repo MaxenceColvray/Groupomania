@@ -16,7 +16,7 @@ function UpdatePost() {
   const [getUrlValue, setgetUrlValue] = useState("");
 
 
-fetch("http://localhost:3000/api/post/" + varUrl.id, {
+fetch("http://51.91.99.62:3000/api/post/" + varUrl.id, {
       method: "GET",
       headers: {
         authorization: `bearer ${

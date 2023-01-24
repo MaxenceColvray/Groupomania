@@ -20,7 +20,7 @@ function Post(props) {
       _id: props.id,
       like: 1,
     };
-    fetch("http://localhost:3000/api/post/" + props.id + "/like", {
+    fetch("http://51.91.99.62:3000/api/post/" + props.id + "/like", {
       method: "put",
       headers: {
         authorization: `bearer ${

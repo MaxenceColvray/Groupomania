@@ -28,7 +28,7 @@ function UpdatePostForm(props) {
 
     console.log(formData);
 
-    fetch("http://localhost:3000/api/post/" + varUrl.id, {
+    fetch("http://51.91.99.62:3000/api/post/" + varUrl.id, {
       method: "put",
       headers: {
         authorization: `bearer ${
@@ -57,7 +57,7 @@ function UpdatePostForm(props) {
   const deletePost = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/api/post/" + varUrl.id, {
+    fetch("http://51.91.99.62:3000/api/post/" + varUrl.id, {
       method: "delete",
       headers: {
         authorization: `bearer ${

@@ -20,7 +20,7 @@ function PostForm() {
     console.log(formData);
 
     const token = (JSON.parse(localStorage.getItem('user')))[0].token
-    fetch("http://localhost:3000/api/post", {
+    fetch("http://51.91.99.62:3000/api/post", {
       method: "post",
       headers: {
         authorization: `bearer ${token}`,

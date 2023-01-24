@@ -14,7 +14,7 @@ function LoginForm() {
     let loginObject = { email: inputEmaill, password: inputPasswordd };
 
     let status = 0; //variable pr récupérer response.status avant de return json()
-    fetch("http://localhost:3000/api/auth/login", {
+    fetch("http://51.91.99.62:3000/api/auth/login", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginObject),

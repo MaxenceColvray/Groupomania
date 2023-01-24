@@ -8,7 +8,7 @@ function Feed() {
   const [posts, setPosts] = useState([]);
   const [isAdmin, setisAdmin] = useState(false);
 
-  fetch("http://localhost:3000/api/auth/verify", {
+  fetch("http://51.91.99.62:3000/api/auth/verify", {
     method: "GET",
     headers: {
       authorization: `bearer ${
@@ -31,7 +31,7 @@ function Feed() {
     });
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/post", {
+    fetch("http://51.91.99.62:3000/api/post", {
       method: "GET",
       headers: {
         authorization: `bearer ${
